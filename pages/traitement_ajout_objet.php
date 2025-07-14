@@ -20,7 +20,6 @@ $id_membre = intval($id_membre);
 $nom_objet = mysqli_real_escape_string($bdd, $nom_objet);
 $id_categorie = intval($id_categorie);
 
-// Insert new object
 $sql_insert_objet = "INSERT INTO obj_objet (nom_objet, id_categorie, id_membre) VALUES ('$nom_objet', $id_categorie, $id_membre)";
 if (!mysqli_query($bdd, $sql_insert_objet)) {
     mysqli_close($bdd);
@@ -29,7 +28,6 @@ if (!mysqli_query($bdd, $sql_insert_objet)) {
 
 $id_objet = mysqli_insert_id($bdd);
 
-// Handle image uploads
 $default_image = '../assets/images/inconnu.png';
 $uploaded_images = [];
 
@@ -58,12 +56,10 @@ if (isset($_FILES['images']) && !empty($_FILES['images']['name'][0])) {
     }
 }
 
-// If no images uploaded, insert default image
 if (empty($uploaded_images)) {
     $uploaded_images[] = $default_image;
 }
 
-// Insert images into obj_images_objet table
 foreach ($uploaded_images as $index => $image_path) {
     $image_path_esc = mysqli_real_escape_string($bdd, $image_path);
     $sql_insert_image = "INSERT INTO obj_images_objet (id_objet, nom_image) VALUES ($id_objet, '$image_path_esc')";

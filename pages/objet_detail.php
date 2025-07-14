@@ -30,7 +30,6 @@ mysqli_close($bdd);
 $objet_image = $objet['objet_image'] ?? '../assets/images/default.png';
 $membre_image = $objet['membre_image'] ?? '../assets/images/default_profile.png';
 
-// Connect to DB again to fetch borrowing history
 $bdd = connecter_bdd();
 
 $sql_emprunts = "SELECT e.date_emprunt, e.date_retour, m.nom AS emprunteur_nom
@@ -61,7 +60,7 @@ mysqli_close($bdd);
 <body>
 <header>
         <nav class="container d-flex justify-content-between align-items-center">
-            <a href="accueil.php" class="navbar-brand">MonSite</a>
+            <a href="accueil.php" class="navbar-brand">SS_emprunt</a>
             <ul class="nav">
                 <li class="nav-item"><a href="accueil.php" class="nav-link">Accueil</a></li>
                 <li class="nav-item"><a href="formulaire.php" class="nav-link">Inscription</a></li>
@@ -102,7 +101,7 @@ mysqli_close($bdd);
 
     <div class="container mt-5">
         <h4>Historique des emprunts</h4>
-        <?php if (count($emprunts) > 0): ?>
+        <?php if (count($emprunts) > 0){ ?>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -112,20 +111,21 @@ mysqli_close($bdd);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($emprunts as $emprunt): ?>
+                    <?php foreach ($emprunts as $emprunt){ ?>
                         <tr>
                             <td><?= htmlspecialchars($emprunt['emprunteur_nom']) ?></td>
                             <td><?= htmlspecialchars($emprunt['date_emprunt']) ?></td>
                             <td><?= htmlspecialchars($emprunt['date_retour'] ?? 'Non retourné') ?></td>
                         </tr>
-                    <?php endforeach; ?>
+                    <?php } ?>
                 </tbody>
             </table>
-        <?php else: ?>
+        <?php }else{ ?>
             <p>Aucun emprunt pour cet objet.</p>
-        <?php endif; ?>
+        <?php } ?>
+    
     </div>
-</main>
+    </main>
 <footer>
         <div class="container">
             &copy; <?= date('Y') ?> SS_emprunt.

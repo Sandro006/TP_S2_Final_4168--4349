@@ -86,7 +86,7 @@ $categories = [
         <div class="row mb-5">
             <?php foreach ($categories as $cat) { ?>
                 <div class="col-md-3 mb-4">
-                    <a href="main.php?categorie=<?= urlencode($cat['name']) ?>" class="text-decoration-none text-dark">
+                    <a href="main.php?categorie=<?= $cat['name'] ?>" class="text-decoration-none text-dark">
                         <div class="card category-card text-center shadow-sm h-100">
                             <img src="<?= $cat['image'] ?>" class="card-img-top category-img" alt="<?= htmlspecialchars($cat['name']) ?>" style="height: 150px; object-fit: cover;">
                             <div class="card-body d-flex flex-column justify-content-center">
@@ -99,7 +99,20 @@ $categories = [
         </div>
         <?php
         $bdd = connecter_bdd();
-        $sql_all_objets = "SELECT * FROM view_objet_detail";
+
+        //objet et Statut avec date de disponibilité
+        // date d'emprunt + nbr de jour d'emprunt
+        $sql_all_objets = "SELECT o.*, 
+            CASE WHEN EXISTS (
+                SELECT 1 FROM obj_emprunt e 
+                WHERE e.id_objet = o.id_objet AND (e.date_retour IS NULL OR e.date_retour > CURDATE())
+            ) THEN 0 ELSE 1 END AS disponible, 
+            (SELECT MIN(e2.date_retour) FROM obj_emprunt e2 WHERE e2.id_objet = o.id_objet AND e2.date_retour > CURDATE()) AS date_disponible,
+            m.nom AS nom_membre, c.nom_categorie AS nom_categorie, o.id_objet AS id_objet
+            FROM obj_objet o
+            JOIN obj_categorie_objet c ON o.id_categorie = c.id_categorie
+            JOIN obj_membre m ON o.id_membre = m.id_membre
+            LEFT JOIN obj_images_objet i ON o.id_objet = i.id_objet";
         $result_all_objets = mysqli_query($bdd, $sql_all_objets);
         $all_objets = [];
         if ($result_all_objets) {
@@ -185,6 +198,30 @@ $categories = [
                             <h5 class="card-title"><?= htmlspecialchars($objet['nom_objet']) ?></h5>
                             <p class="card-text">Propriétaire: <?= htmlspecialchars($objet['nom_membre']) ?></p>
                             <p class="card-text"><small class="text-muted"><?= htmlspecialchars($cat_name) ?></small></p>
+                            <p class="card-text">
+                                <strong>Status: </strong>
+                                <?php if (($objet['disponible'] ?? 1) == 1) { ?>
+                                    <span class="text-success">Disponible</span>
+                                <?php } else { 
+                                    $date_dispo = $objet['date_disponible'];
+                                    echo $date_dispo;
+                                    if ($date_dispo) {
+                                        $date_formatted = date('d-m-Y', strtotime($date_dispo));
+                                        echo "<span class='text-danger'>Emprunté - Disponible le $date_formatted</span>";
+                                    } else {
+                                        ?>
+                                        <span class='text-danger'>Emprunté <?= $date_dispo ?></span>
+                                    <?php
+                                    }
+                                } ?>
+                            </p>
+                            <p class="card-text"><a href="emprunt.php?id=<?= $objet['id_objet'] ?>" class="btn btn-secondary mb-4">Emprunter cette objet ?</a>
+                            </p>
+                            <?php if (($objet['disponible'] ?? 1) == 0 && !empty($objet['date_disponible'])) {
+                                $date_retour_formatted = date('d-m-Y', strtotime($objet['date_disponible']));
+                            ?>
+                                <p class="card-text"><strong>Date de retour:</strong> <?= htmlspecialchars($date_retour_formatted) ?></p>
+                            <?php } ?>
                         </div>
                     </a>
                 </div>
