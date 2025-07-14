@@ -228,7 +228,6 @@ INSERT INTO obj_emprunt (id_objet, id_membre, date_emprunt, date_retour) VALUES
 (40, 1, '2023-01-10', '2023-01-20'),
 (40, 4, '2023-02-15', NULL);
 
-
 CREATE or REPLACE VIEW view_objet_detail AS
 SELECT o.id_objet, o.nom_objet, c.nom_categorie, m.nom AS nom_membre, m.email, i.nom_image
 FROM obj_objet o

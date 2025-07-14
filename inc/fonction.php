@@ -1,6 +1,6 @@
 <?php
 function connecter_bdd(){
-    $bdd = mysqli_connect('localhost', 'root', '', 'obj_emp');
+    $bdd = mysqli_connect('localhost', 'ETU004168', '', 'db_s2_ETU004168');
     if (!$bdd) {
         die("Erreur de connexion à la base de données : " . mysqli_connect_error());
     }
@@ -115,3 +115,4 @@ function lister_objets_par_categorie($categorie) {
     mysqli_close($bdd);
     return $objets;
 }
+// wylJNwr4
