@@ -1,0 +1,158 @@
+/*!
+ * Bootstrap Dark Theme v5.3.0 (https://getbootstrap.com/)
+ * Custom dark theme overrides for Bootstrap 5
+ * This file overrides Bootstrap variables and components for dark mode
+ */
+
+/* Body and background */
+body {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Links */
+a {
+  color: #712bb3 !important;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: #2b3f53 !important;
+  text-decoration: underline !important;
+}
+
+/* Navbar */
+.navbar, .navbar-light, .navbar-dark {
+  background-color: #1a1a1a !important;
+  transition: background-color 0.3s ease;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #0d6efd !important;
+  border-color: #0d6efd !important;
+  color: #fff !important;
+  border-radius: 0.5rem !important;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.4);
+}
+.btn-primary:hover {
+  background-color: #0b5ed7 !important;
+  border-color: #0a58ca !important;
+  color: #fff !important;
+  box-shadow: 0 6px 12px rgba(11, 94, 215, 0.6);
+}
+
+/* Forms */
+.form-control, .form-select {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #444 !important;
+  border-radius: 0.5rem !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.form-control:focus, .form-select:focus {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  border-color: #66ccff !important;
+  box-shadow: 0 0 8px rgba(102, 204, 255, 0.6) !important;
+  outline: none !important;
+}
+
+/* Tables */
+.table {
+  color: #e0e0e0 !important;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+  transition: box-shadow 0.3s ease;
+}
+.table thead th {
+  border-bottom: 2px solid #444 !important;
+}
+.table tbody + tbody {
+  border-top: 2px solid #444 !important;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #2a2a2a !important;
+  transition: background-color 0.3s ease;
+}
+.table-hover tbody tr:hover {
+  background-color: #333 !important;
+  transition: background-color 0.3s ease;
+}
+
+/* Pagination */
+.page-link {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #444 !important;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.page-link:hover {
+  background-color: #66ccff !important;
+  color: #000 !important;
+  border-color: #3399ff !important;
+}
+
+/* Alerts */
+.alert-primary {
+  background-color: #0d6efd !important;
+  color: #fff !important;
+  border-color: #0d6efd !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.4);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Cards */
+.card {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  border: 1px solid #444 !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Modal */
+.modal-content {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  border-radius: 0.5rem !important;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #121212;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 4px;
+  border: 2px solid #121212;
+  transition: background-color 0.3s ease;
+}
+
+/* Utility classes */
+.bg-dark-custom {
+  background-color: #1e1e1e !important;
+  transition: background-color 0.3s ease;
+}
+.text-light-custom {
+  color: #e0e0e0 !important;
+  transition: color 0.3s ease;
+}
+.link-primary-custom {
+  color: #51585e !important;
+  transition: color 0.3s ease;
+}
+.link-primary-custom:hover {
+  color: #8b4fbd !important;
+  text-decoration: underline !important;
+}

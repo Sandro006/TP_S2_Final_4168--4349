@@ -1,0 +1,44 @@
+I. Base de données
+-------------------------------
+Fonctions SQL à prévoir :
+- [x] connecter_bdd() (Sandro)
+Tâches SQL :
+- [x] Créer la table membre
+- [x] Créer la table categorie_objet 
+- [x]xCréer la table objet 
+- [x]xCréer la table images_objet 
+- [x]xCréer la table emprunt 
+- [x] Insérer 4 membres de test 
+- [ ] Insérer 4 catégories (esthétique, bricolage, mécanique, cuisine) (Sarobidy)
+- [ ] Insérer 10 objets par membre (répartis sur les catégories) (Sarobidy)
+- [ ] Insérer 10 emprunts (pour tester l’affichage des dates de retour) (Sarobidy)
+
+II. Pages membres
+-------------------------------
+Page inscription :
+- [ ] Formulaire : nom, date de naissance, genre, email, ville, mdp, image_profil (Sandro)
+- [ ] Vérifier email unique (Sandro)
+- [ ] Hasher le mdp (Sarobidy)
+- [ ] Fonction : verifier_email_disponible() (Sandro)
+- [ ] Fonction : ajouter_membre() (Sarobidy)
+- [ ] Upload d’image de profil (uploads/profil/) (Sarobidy)
+
+Page login :
+
+- [ ] Formulaire : email + mdp (Sandro)
+- [ ] Vérifier la combinaison email/mdp (Sandro)
+- [ ] Démarrer la session et rediriger (Sarobidy)
+- [ ] Fonction : verifier_login() (Sandro)
+
+III. Page liste des objets
+-------------------------------
+Affichage :
+- [ ] Lister tous les objets (Sandro)
+- [ ] Afficher nom objet, catégorie, propriétaire (Sarobidy)
+- [ ] Si emprunté : afficher date de retour (Sandro)
+- [ ] Fonction : lister_objets() (Sarobidy)
+
+Filtre :
+- [ ] Filtrer par catégorie (Sandro)
+
+===============================
