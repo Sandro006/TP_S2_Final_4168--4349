@@ -198,6 +198,10 @@ $categories = [
                             <h5 class="card-title"><?= htmlspecialchars($objet['nom_objet']) ?></h5>
                             <p class="card-text">Propriétaire: <?= htmlspecialchars($objet['nom_membre']) ?></p>
                             <p class="card-text"><small class="text-muted"><?= htmlspecialchars($cat_name) ?></small></p>
+                            
+
+                            
+                            
                             <p class="card-text">
                                 <strong>Status: </strong>
                                 <?php if (($objet['disponible'] ?? 1) == 1) { ?>
@@ -215,6 +219,10 @@ $categories = [
                                     }
                                 } ?>
                             </p>
+
+
+
+                            
                             <p class="card-text"><a href="emprunt.php?id=<?= $objet['id_objet'] ?>" class="btn btn-secondary mb-4">Emprunter cette objet ?</a>
                             </p>
                             <?php if (($objet['disponible'] ?? 1) == 0 && !empty($objet['date_disponible'])) {
