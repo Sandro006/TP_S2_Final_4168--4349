@@ -1,6 +1,6 @@
 <?php
 function connecter_bdd(){
-    $bdd = mysqli_connect('localhost', 'ETU004168', '', 'db_s2_ETU004168');
+    $bdd = mysqli_connect('localhost', 'ETU004168', 'wylJNwr4', 'db_s2_ETU004168');
     if (!$bdd) {
         die("Erreur de connexion à la base de données : " . mysqli_connect_error());
     }

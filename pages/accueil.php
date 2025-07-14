@@ -33,7 +33,7 @@ $categories = [
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Accueil<?= htmlspecialchars($user_name) ?></title>
+    <title>Accueil-<?= htmlspecialchars($user_name) ?></title>
     <link rel="stylesheet" href="../assets/bootstrap_css/bootstrap.min.css" />
     <link rel="stylesheet" href="../assets/custom.css" />
 </head>
@@ -72,8 +72,10 @@ $categories = [
             ?>
             <img src="<?= $user_image?>" alt="Photo de profil" class="rounded-circle me-3" style="width: 80px; height: 80px; object-fit: cover;">
             <div>
+                <a href="fiche.php">
                 <h1 class="mb-0">@<?= $user_name  ?></h1>
                 <p class="mb-0 "><?= $user_email_display ?></p>
+            </a>
             </div>
             <div>
                 
