@@ -148,7 +148,7 @@ $categories = [
             </div>
             <div class="form-check mb-3">
                 <input class="form-check-input" type="checkbox" value="1" id="filterAvailable" name="filterAvailable" <?= (isset($_GET['filterAvailable']) && $_GET['filterAvailable'] == '1') ? 'checked' : '' ?> />
-                <label class="form-check-label" for="filterAvailable">
+                <label class="form-check-label" >
                     Afficher uniquement les objets disponibles
                 </label>
             </div>
@@ -206,8 +206,8 @@ $categories = [
                                     $date_dispo = $objet['date_disponible'];
                                     echo $date_dispo;
                                     if ($date_dispo) {
-                                        $date_formatted = date('d-m-Y', strtotime($date_dispo));
-                                        echo "<span class='text-danger'>Emprunté - Disponible le $date_formatted</span>";
+                                        $date_de_retour = date('d-m-Y', strtotime($date_dispo));
+                                        echo "<span class='text-danger'>Emprunté - Disponible le $date_de_retour</span>";
                                     } else {
                                         ?>
                                         <span class='text-danger'>Emprunté <?= $date_dispo ?></span>
@@ -218,9 +218,9 @@ $categories = [
                             <p class="card-text"><a href="emprunt.php?id=<?= $objet['id_objet'] ?>" class="btn btn-secondary mb-4">Emprunter cette objet ?</a>
                             </p>
                             <?php if (($objet['disponible'] ?? 1) == 0 && !empty($objet['date_disponible'])) {
-                                $date_retour_formatted = date('d-m-Y', strtotime($objet['date_disponible']));
+                                $date_de_retour = date('d-m-Y', strtotime($objet['date_disponible']));
                             ?>
-                                <p class="card-text"><strong>Date de retour:</strong> <?= htmlspecialchars($date_retour_formatted) ?></p>
+                                <p class="card-text"><strong>Date de retour:</strong> <?= htmlspecialchars($date_de_retour) ?></p>
                             <?php } ?>
                         </div>
                     </a>
