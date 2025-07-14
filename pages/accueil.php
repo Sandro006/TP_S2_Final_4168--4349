@@ -95,6 +95,100 @@ $categories = [
                 </div>
             <?php } ?>
         </div>
+        <?php
+        $bdd = connecter_bdd();
+        $sql_all_objets = "SELECT * FROM view_objet_detail";
+        $result_all_objets = mysqli_query($bdd, $sql_all_objets);
+        $all_objets = [];
+        if ($result_all_objets) {
+            while ($row = mysqli_fetch_assoc($result_all_objets)) {
+                $all_objets[] = $row;
+            }
+        }
+        mysqli_close($bdd);
+        ?>
+
+        <h2 class="mb-4 mt-4">Tous les objets</h2>
+        <form id="filterForm" class="mb-3" method="GET" action="accueil.php">
+            <div class="mb-3">
+                <label for="filterCategory" class="form-label">Filtrer par catégorie:</label>
+                <select id="filterCategory" name="filterCategory" class="form-select" aria-label="Filtrer par catégorie">
+                    <option value="all" <?= (isset($_GET['filterCategory']) && $_GET['filterCategory'] === 'all') ? 'selected' : '' ?>>Tous</option>
+                    <?php foreach ($categories as $cat) {
+                        $cat_name_filter = strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', $cat['name']));
+                        $cat_name_filter = preg_replace('/[^a-z]/', '', $cat_name_filter);
+                        $selected = (isset($_GET['filterCategory']) && $_GET['filterCategory'] === $cat_name_filter) ? 'selected' : '';
+                    ?>
+                        <option value="<?= htmlspecialchars($cat_name_filter) ?>" <?= $selected ?>><?= htmlspecialchars($cat['name']) ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="filterName" class="form-label">Trier par nom:</label>
+                <select id="filterName" name="filterName" class="form-select" aria-label="Trier par nom">
+                    <option value="none" <?= (!isset($_GET['filterName']) || $_GET['filterName'] === 'none') ? 'selected' : '' ?>>Aucun</option>
+                    <option value="asc" <?= (isset($_GET['filterName']) && $_GET['filterName'] === 'asc') ? 'selected' : '' ?>>A à Z</option>
+                    <option value="desc" <?= (isset($_GET['filterName']) && $_GET['filterName'] === 'desc') ? 'selected' : '' ?>>Z à A</option>
+                </select>
+            </div>
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" value="1" id="filterAvailable" name="filterAvailable" <?= (isset($_GET['filterAvailable']) && $_GET['filterAvailable'] == '1') ? 'checked' : '' ?> />
+                <label class="form-check-label" for="filterAvailable">
+                    Afficher uniquement les objets disponibles
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary">Appliquer le filtre</button>
+        </form>
+        <div class="d-flex flex-wrap" id="objectsContainer">
+            <?php
+            $filtered_objets = $all_objets;
+            if (isset($_GET['filterCategory']) && $_GET['filterCategory'] !== 'all') {
+                $filtered_objets = array_filter($filtered_objets, function($obj) {
+                    $cat_name_filter = strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', $obj['nom_categorie']));
+                    $cat_name_filter = preg_replace('/[^a-z]/', '', $cat_name_filter);
+                    return $cat_name_filter === $_GET['filterCategory'];
+                });
+            }
+            if (isset($_GET['filterAvailable']) && $_GET['filterAvailable'] == '1') {
+                $filtered_objets = array_filter($filtered_objets, function($obj) {
+                    return ($obj['disponible'] ?? 1) == 1;
+                });
+            }
+            if (isset($_GET['filterName']) && in_array($_GET['filterName'], ['asc', 'desc'])) {
+                usort($filtered_objets, function($a, $b) {
+                    $nameA = strtolower($a['nom_objet']);
+                    $nameB = strtolower($b['nom_objet']);
+                    if ($nameA == $nameB) return 0;
+                    if ($_GET['filterName'] === 'asc') {
+                        return ($nameA < $nameB) ? -1 : 1;
+                    } else {
+                        return ($nameA > $nameB) ? -1 : 1;
+                    }
+                });
+            }
+            foreach ($filtered_objets as $objet) {
+                $image_path = '../assets/images/default.png';
+                if (!empty($objet['nom_image'])) {
+                    $image_path = $objet['nom_image'];
+                }
+                $cat_name = $objet['nom_categorie'];
+                $cat_name_filter = strtolower(iconv('UTF-8', 'ASCII//TRANSLIT', $cat_name));
+                $cat_name_filter = preg_replace('/[^a-z]/', '', $cat_name_filter);
+                $disponible = $objet['disponible'] ?? 1;
+            ?>
+                <div class="card object-card me-3" data-category="<?= htmlspecialchars($cat_name_filter) ?>" data-name="<?= htmlspecialchars(strtolower($objet['nom_objet'])) ?>" data-available="<?= $disponible ?>" style="width: 18rem; margin-bottom: 1rem;">
+                    <a href="objet_detail.php?id=<?= urlencode($objet['id_objet']) ?>" class="text-decoration-none text-dark">
+                        <img src="<?= htmlspecialchars($image_path) ?>" alt="<?= htmlspecialchars($objet['nom_objet']) ?>" class="card-img-top" style="height: 180px; object-fit: cover;" />
+                        <div class="card-body">
+                            <h5 class="card-title"><?= htmlspecialchars($objet['nom_objet']) ?></h5>
+                            <p class="card-text">Propriétaire: <?= htmlspecialchars($objet['nom_membre']) ?></p>
+                            <p class="card-text"><small class="text-muted"><?= htmlspecialchars($cat_name) ?></small></p>
+                        </div>
+                    </a>
+                </div>
+            <?php } ?>
+        </div>
+
     </main>
     <footer>
         <div class="container">
