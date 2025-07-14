@@ -9,18 +9,16 @@ Tâches SQL :
 - [x]xCréer la table images_objet 
 - [x]xCréer la table emprunt 
 - [x] Insérer 4 membres de test 
-- [ ] Insérer 4 catégories (esthétique, bricolage, mécanique, cuisine) (Sarobidy)
-- [ ] Insérer 10 objets par membre (répartis sur les catégories) (Sarobidy)
-- [ ] Insérer 10 emprunts (pour tester l’affichage des dates de retour) (Sarobidy)
+- [x] Insérer 4 catégories (esthétique, bricolage, mécanique, cuisine) (Sarobidy)
+- [x] Insérer 10 objets par membre (répartis sur les catégories) (Sarobidy)
+- [x] Insérer 10 emprunts (pour tester l’affichage des dates de retour) (Sarobidy)
 
 II. Pages membres
 -------------------------------
 Page inscription :
-- [ ] Formulaire : nom, date de naissance, genre, email, ville, mdp, image_profil (Sandro)
-- [ ] Vérifier email unique (Sandro)
-- [ ] Hasher le mdp (Sarobidy)
-- [ ] Fonction : verifier_email_disponible() (Sandro)
-- [ ] Fonction : ajouter_membre() (Sarobidy)
+- [x] Formulaire : nom, date de naissance, genre, email, ville, mdp, image_profil (Sandro)
+- [x] Vérifier email unique (Sarobidy)
+- [x] Fonction : ajouter_membre() (Sandro)
 - [ ] Upload d’image de profil (uploads/profil/) (Sarobidy)
 
 Page login :

@@ -6,6 +6,9 @@
     <title>Version</title>
 </head>
 <body>
-    
+    <?php 
+    header('Location: formulaire.php'); 
+    ?>
+
 </body>
 </html>
