@@ -40,13 +40,14 @@ $categories = [
 <body>
     <header>
         <nav class="container d-flex justify-content-between align-items-center">
-            <a href="accueil.php" class="navbar-brand">MonSite</a>
+            <a href="accueil.php" class="navbar-brand">SS_emprunt</a>
             <ul class="nav">
                 <li class="nav-item"><a href="accueil.php" class="nav-link">Accueil</a></li>
                 <li class="nav-item"><a href="formulaire.php" class="nav-link">Inscription</a></li>
                 <li class="nav-item"><a href="login.php" class="nav-link">Connexion</a></li>
                 <li class="nav-item"><a href="../inc/Deconnexion.php" class="nav-link">Deconnexion</a></li>
             </ul>
+            <a href="ajouter_objet.php" class="btn btn-danger mb-3 float-end">Ajouter un objet</a>
         </nav>
     </header>
     <main class="container mt-5">
@@ -73,6 +74,9 @@ $categories = [
             <div>
                 <h1 class="mb-0">@<?= $user_name  ?></h1>
                 <p class="mb-0 "><?= $user_email_display ?></p>
+            </div>
+            <div>
+                
             </div>
         </div>
 

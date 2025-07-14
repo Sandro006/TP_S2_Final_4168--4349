@@ -44,14 +44,17 @@ $objets = lister_objets_par_categorie($categorie);
                     $image_path = '../assets/images/default.png';
                     if (!empty($objet['nom_image'])) {
                         $image_path = $objet['nom_image'];
-                    }
-                    echo '<div class="card">';
-                    echo '<img src="' . htmlspecialchars($image_path) . '" alt="' . htmlspecialchars($objet['nom_objet']) . '" class="card-img-top" />';
-                    echo '<div class="card-body">';
-                    echo '<h5 class="card-title">' . htmlspecialchars($objet['nom_objet']) . '</h5>';
-                    echo '<p class="card-text">Propriétaire: ' . htmlspecialchars($objet['nom_membre']) . '</p>';
-                    
-                    echo '</div></div>';
+                    } ?>
+            <a href="objet_detail.php?id=<?= $objet['id_objet'] ?>">
+                <div class="card">
+                <img src="<?= htmlspecialchars($image_path) ?>" class="card-img-top" />
+                <div class="card-body">
+                <h5 class="card-title"><?= htmlspecialchars($objet['nom_objet']) ?></h5>
+                <p class="card-text">Propriétaire: <?= htmlspecialchars($objet['nom_membre']) ?>
+     
+                </div></div>
+            </a>
+                <?php
                 }
             }
             ?>
@@ -65,4 +68,3 @@ $objets = lister_objets_par_categorie($categorie);
     </footer>
 </body>
 </html>
-wylJNwr4

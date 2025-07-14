@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = inserer_membre($nom, $date_naissance, $genre, $email, $ville, $mdp, $image_profil_path);
 
     if ($result['success']) {
-        header('Location: formulaire.php?success=1');
+        header('Location: accueil.php');
         exit;
     } else {
         die("Erreur lors de l'insertion du membre : " . $result['error']);
