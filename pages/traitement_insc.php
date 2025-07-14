@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $target_file = $upload_dir . $filename;
 
         if (move_uploaded_file($tmp_name, $target_file)) {
-            $image_profil_path = 'assets/images/' . $filename;
+            $image_profil_path = '../assets/images/' . $filename;
         } else {
             die("Erreur lors du téléchargement de l'image.");
         }

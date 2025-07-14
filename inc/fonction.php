@@ -1,6 +1,6 @@
 <?php
 function connecter_bdd(){
-    $bdd = mysqli_connect('localhost', 'root', '', 'Obj_emp');
+    $bdd = mysqli_connect('localhost', 'ETU004168', 'wylJNwr4', 'db_s2_ETU004168');
     if (!$bdd) {
         die("Erreur de connexion à la base de données : " . mysqli_connect_error());
     }
@@ -63,4 +63,82 @@ function verifier_login($email, $mdp) {
     return false;
 }
 
-?>
+function upload_fichier($file, $dossier_destination) {
+    if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
+        return ['success' => false, 'error' => 'Aucun fichier téléchargé ou erreur lors du téléchargement.'];
+    }
+
+    if (!is_dir($dossier_destination)) {
+        if (!mkdir($dossier_destination, 0755, true)) {
+            return ['success' => false, 'error' => 'Impossible de créer le dossier de destination.'];
+        }
+    }
+
+    $nom_original = $file['name'];
+    $extension = pathinfo($nom_original, PATHINFO_EXTENSION);
+    $nom_sans_extension = pathinfo($nom_original, PATHINFO_FILENAME);
+
+    $nom_sans_extension = preg_replace('/[^a-zA-Z0-9_-]/', '_', $nom_sans_extension);
+
+    $nouveau_nom = $nom_sans_extension . '_' . time() . '.' . $extension;
+
+    $chemin_destination = rtrim($dossier_destination, '/') . '/' . $nouveau_nom;
+
+    if (move_uploaded_file($file['tmp_name'], $chemin_destination)) {
+        return ['success' => true, 'path' => $chemin_destination];
+    } else {
+        return ['success' => false, 'error' => 'Erreur lors du déplacement du fichier téléchargé.'];
+    }
+}
+
+function upload_avec_id($file, $dossier_destination, $id) {
+    if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
+        return ['success' => false, 'error' => 'Aucun fichier téléchargé ou erreur lors du téléchargement.'];
+    }
+
+    if (!is_dir($dossier_destination)) {
+        if (!mkdir($dossier_destination, 0755, true)) {
+            return ['success' => false, 'error' => 'Impossible de créer le dossier de destination.'];
+        }
+    }
+
+    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+    $nouveau_nom = $id . '.' . $extension;
+    $chemin_destination = rtrim($dossier_destination, '/') . '/' . $nouveau_nom;
+
+    if (move_uploaded_file($file['tmp_name'], $chemin_destination)) {
+        $bdd = connecter_bdd();
+        $chemin_bdd = mysqli_real_escape_string($bdd, $chemin_destination);
+        $id_esc = intval($id);
+
+        $sql = "UPDATE obj_membre SET image_profil = '$chemin_bdd' WHERE id_membre = $id_esc";
+        $result = mysqli_query($bdd, $sql);
+        mysqli_close($bdd);
+
+        if ($result) {
+            return ['success' => true, 'path' => $chemin_destination];
+        } else {
+            return ['success' => false, 'error' => 'Erreur lors de la mise à jour du chemin dans la base de données.'];
+        }
+    } else {
+        return ['success' => false, 'error' => 'Erreur lors du déplacement du fichier téléchargé.'];
+    }
+}
+
+function lister_objets_par_categorie($categorie) {
+    $bdd = connecter_bdd();
+    $categorie_esc = mysqli_real_escape_string($bdd, $categorie);
+
+    $sql = "SELECT * FROM  view_objet_detail
+            WHERE nom_categorie = '$categorie_esc'";
+
+    $result = mysqli_query($bdd, $sql);
+    $objets = [];
+    if ($result) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $objets[] = $row;
+        }
+    }
+    mysqli_close($bdd);
+    return $objets;
+}

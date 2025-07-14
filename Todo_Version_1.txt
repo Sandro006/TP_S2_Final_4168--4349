@@ -19,21 +19,21 @@ Page inscription :
 - [x] Formulaire : nom, date de naissance, genre, email, ville, mdp, image_profil (Sandro)
 - [x] Vérifier email unique (Sarobidy)
 - [x] Fonction : ajouter_membre() (Sandro)
-- [ ] Upload d’image de profil (uploads/profil/) (Sarobidy)
+- [x] Upload d’image de profil (uploads/profil/) (Sarobidy)
 
 Page login :
 
-- [ ] Formulaire : email + mdp (Sandro)
-- [ ] Vérifier la combinaison email/mdp (Sandro)
-- [ ] Démarrer la session et rediriger (Sarobidy)
-- [ ] Fonction : verifier_login() (Sandro)
+- [x] Formulaire : email + mdp (Sandro)
+- [x] Vérifier la combinaison email/mdp (Sandro)
+- [x] Démarrer la session et rediriger (Sarobidy)
+- [x] Fonction : verifier_login() (Sandro)
 
 III. Page liste des objets
 -------------------------------
 Affichage :
-- [ ] Lister tous les objets (Sandro)
+- [x] Lister tous les objets (Sarobidy)
 - [ ] Afficher nom objet, catégorie, propriétaire (Sarobidy)
-- [ ] Si emprunté : afficher date de retour (Sandro)
+- [ ] Si emprunté : afficher date de retour (Sarobidy)
 - [ ] Fonction : lister_objets() (Sarobidy)
 
 Filtre :
