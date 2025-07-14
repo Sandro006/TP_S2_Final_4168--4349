@@ -1,6 +1,6 @@
 -- Create view for objects with category and member info including image
-
-CREATE VIEW view_objet_detail AS
+CREATE DATABASE Obj_emp;
+USE Obj_emp;
 CREATE TABLE obj_membre (
     id_membre INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100) NOT NULL,
@@ -145,9 +145,8 @@ INSERT INTO obj_images_objet (id_objet, nom_image) VALUES
 (39, '../assets/images/esthetique.png'),
 (40, '../assets/images/cuisine.png');
 
-DROP VIEW IF EXISTS view_objet_detail;
 CREATE or REPLACE VIEW view_objet_detail AS
-SELECT o.id_objet, o.nom_objet, c.nom_categorie, m.nom, i.nom_image AS nom_membre, m.email, i.nom_image
+SELECT o.id_objet, o.nom_objet, c.nom_categorie, m.nom AS nom_membre, m.email, i.nom_image
 FROM obj_objet o
 JOIN obj_categorie_objet c ON o.id_categorie = c.id_categorie
 JOIN obj_membre m ON o.id_membre = m.id_membre

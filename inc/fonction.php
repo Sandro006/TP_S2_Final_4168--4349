@@ -1,6 +1,6 @@
 <?php
 function connecter_bdd(){
-    $bdd = mysqli_connect('localhost', 'ETU004168', 'wylJNwr4', 'db_s2_ETU004168');
+    $bdd = mysqli_connect('localhost', 'root', '', 'obj_emp');
     if (!$bdd) {
         die("Erreur de connexion à la base de données : " . mysqli_connect_error());
     }
@@ -63,33 +63,6 @@ function verifier_login($email, $mdp) {
     return false;
 }
 
-function upload_fichier($file, $dossier_destination) {
-    if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {
-        return ['success' => false, 'error' => 'Aucun fichier téléchargé ou erreur lors du téléchargement.'];
-    }
-
-    if (!is_dir($dossier_destination)) {
-        if (!mkdir($dossier_destination, 0755, true)) {
-            return ['success' => false, 'error' => 'Impossible de créer le dossier de destination.'];
-        }
-    }
-
-    $nom_original = $file['name'];
-    $extension = pathinfo($nom_original, PATHINFO_EXTENSION);
-    $nom_sans_extension = pathinfo($nom_original, PATHINFO_FILENAME);
-
-    $nom_sans_extension = preg_replace('/[^a-zA-Z0-9_-]/', '_', $nom_sans_extension);
-
-    $nouveau_nom = $nom_sans_extension . '_' . time() . '.' . $extension;
-
-    $chemin_destination = rtrim($dossier_destination, '/') . '/' . $nouveau_nom;
-
-    if (move_uploaded_file($file['tmp_name'], $chemin_destination)) {
-        return ['success' => true, 'path' => $chemin_destination];
-    } else {
-        return ['success' => false, 'error' => 'Erreur lors du déplacement du fichier téléchargé.'];
-    }
-}
 
 function upload_avec_id($file, $dossier_destination, $id) {
     if (!isset($file) || $file['error'] !== UPLOAD_ERR_OK) {

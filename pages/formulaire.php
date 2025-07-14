@@ -6,11 +6,16 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Formulaire Membre</title>
-    <link rel="stylesheet" href="../assets/bootstrap_css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/bootstrap_css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/custom.css" />
 </head>
 <body>
-    <div class="container mt-5">
+    <header>
+    <br><br>
+    </header>
+    <main class="container mt-5">
         <h1 class="mb-4">Formulaire Membre Pour emprunt_SS</h1>
         <p><a href="login.php">Cliquez-ici</a> si vous avez déjà un compte</p>
         <form action="traitement_insc.php" method="post" enctype="multipart/form-data">
@@ -56,6 +61,11 @@
 
             <button type="submit" class="btn btn-primary">Envoyer</button>
         </form>
-    </div>
+    </main>
+    <footer>
+        <div class="container">
+            &copy; <?= date('Y') ?> SS_emprunt.
+        </div>
+    </footer>
 </body>
 </html>

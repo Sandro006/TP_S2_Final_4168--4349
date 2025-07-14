@@ -19,23 +19,21 @@ $objets = lister_objets_par_categorie($categorie);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Objets - <?= htmlspecialchars($categorie) ?></title>
     <link rel="stylesheet" href="../assets/bootstrap_css/bootstrap.min.css" />
-    <style>
-        .object-card {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .card {
-            width: 18rem;
-        }
-        .card-img-top {
-            height: 180px;
-            object-fit: cover;
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/custom.css" />
 </head>
 <body>
-    <div class="container mt-5">
+    <header>
+        <nav class="container d-flex justify-content-between align-items-center">
+            <a href="accueil.php" class="navbar-brand">MonSite</a>
+            <ul class="nav">
+                <li class="nav-item"><a href="accueil.php" class="nav-link">Accueil</a></li>
+                <li class="nav-item"><a href="formulaire.php" class="nav-link">Inscription</a></li>
+                <li class="nav-item"><a href="login.php" class="nav-link">Connexion</a></li>
+                <li class="nav-item"><a href="../inc/Deconnexion.php" class="nav-link">Deconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container mt-5">
         <h2 class="mb-4">Objets de la catégorie: <?= htmlspecialchars($categorie) ?></h2>
         <div class="object-card">
             <?php
@@ -45,7 +43,6 @@ $objets = lister_objets_par_categorie($categorie);
                 foreach ($objets as $objet) {
                     $image_path = '../assets/images/default.png';
                     if (!empty($objet['nom_image'])) {
-                        // Ensure the image path is relative to the web root
                         $image_path = $objet['nom_image'];
                     }
                     echo '<div class="card">';
@@ -53,12 +50,19 @@ $objets = lister_objets_par_categorie($categorie);
                     echo '<div class="card-body">';
                     echo '<h5 class="card-title">' . htmlspecialchars($objet['nom_objet']) . '</h5>';
                     echo '<p class="card-text">Propriétaire: ' . htmlspecialchars($objet['nom_membre']) . '</p>';
+                    
                     echo '</div></div>';
                 }
             }
             ?>
         </div>
         <a href="accueil.php" class="btn btn-secondary mt-3">Retour aux catégories</a>
-    </div>
+    </main>
+    <footer>
+        <div class="container">
+            &copy; <?= date('Y') ?> SS_emprunt.
+        </div>
+    </footer>
 </body>
 </html>
+wylJNwr4

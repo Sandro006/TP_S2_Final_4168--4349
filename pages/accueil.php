@@ -33,13 +33,23 @@ $categories = [
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Accueil - Bienvenue <?= htmlspecialchars($user_name) ?></title>
+    <title>Accueil<?= htmlspecialchars($user_name) ?></title>
     <link rel="stylesheet" href="../assets/bootstrap_css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../assets/bootstrap_css/bootstrap_dark.min.css" />
-   
+    <link rel="stylesheet" href="../assets/custom.css" />
 </head>
 <body>
-    <div class="container mt-5">
+    <header>
+        <nav class="container d-flex justify-content-between align-items-center">
+            <a href="accueil.php" class="navbar-brand">MonSite</a>
+            <ul class="nav">
+                <li class="nav-item"><a href="accueil.php" class="nav-link">Accueil</a></li>
+                <li class="nav-item"><a href="formulaire.php" class="nav-link">Inscription</a></li>
+                <li class="nav-item"><a href="login.php" class="nav-link">Connexion</a></li>
+                <li class="nav-item"><a href="../inc/Deconnexion.php" class="nav-link">Deconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container mt-5">
         <div class="d-flex align-items-center mb-4">
             <?php
             $bdd = connecter_bdd();
@@ -59,10 +69,10 @@ $categories = [
             }
             mysqli_close($bdd);
             ?>
-            <img src="<?= htmlspecialchars($user_image)?>" alt="Photo de profil" class="rounded-circle me-3" style="width: 80px; height: 80px; object-fit: cover;">
+            <img src="<?= $user_image?>" alt="Photo de profil" class="rounded-circle me-3" style="width: 80px; height: 80px; object-fit: cover;">
             <div>
-                <h1 class="mb-0"><?= htmlspecialchars($user_name) ?>!</h1>
-                <p class="mb-0 text-muted"><?= htmlspecialchars($user_email_display) ?></p>
+                <h1 class="mb-0">@<?= $user_name  ?></h1>
+                <p class="mb-0 "><?= $user_email_display ?></p>
             </div>
         </div>
 
@@ -81,6 +91,11 @@ $categories = [
                 </div>
             <?php } ?>
         </div>
-    </div>
+    </main>
+    <footer>
+        <div class="container">
+            &copy; <?= date('Y') ?> SS_emprunt.
+        </div>
+    </footer>
 </body>
 </html>
